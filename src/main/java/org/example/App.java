@@ -28,7 +28,8 @@ public class App {
      * @param args args
      */
     public static void main(String[] args) {
-        final MongoDatabase database = conectar();
+        final MongoClient mongoClient = conectar();
+        final MongoDatabase database = mongoClient.getDatabase("Trabalho6");
         listaProdutos(database);
         insereproduto(database);
         listaProdutos(database);
@@ -36,6 +37,7 @@ public class App {
         listaProdutos(database);
         apagaProduto(database);
         listaProdutos(database);
+        mongoClient.close();
     }
 
     /**
@@ -48,14 +50,13 @@ public class App {
     /**
      * a. concetar — Retorna uma conexão com o banco de dados.
      */
-    public static MongoDatabase conectar() {
+    public static MongoClient conectar() {
         final ConnectionString connectionString =
                 new ConnectionString("mongodb+srv://leonardo:leonardo@trabalho6.as8ue.mongodb.net/?retryWrites=true&w=majority");
         final MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
                 .build();
-        final MongoClient mongoClient = MongoClients.create(settings);
-        return mongoClient.getDatabase("Trabalho6");
+        return MongoClients.create(settings);
     }
 
     /**
@@ -65,14 +66,11 @@ public class App {
         final MongoCollection<Document> col = database.getCollection("produtos");
         // Faz a leitura da coleção
         final FindIterable<Document> fi = col.find();
-        final MongoCursor<Document> cursor = fi.iterator();
 
-        try {
+        try (MongoCursor<Document> cursor = fi.iterator()) {
             while (cursor.hasNext()) {
                 System.out.println(cursor.next().toJson());
             }
-        } finally {
-            cursor.close();
         }
     }
 
