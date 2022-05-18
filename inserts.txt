@@ -1,0 +1,44 @@
+db.produtos.insert([
+  {
+    idProduto: "1",
+    nome: "Calular Galaxy S10",
+    descricao: "128 Gb, Preto, com carregador",
+    valor: "1250.0",
+    estado: "Poucos riscos, estado de novo"
+  },
+  {
+    idProduto: "2",
+    nome: "Prod2",
+    descricao: "Bla bla",
+    valor: "1100.0",
+    estado: "Bla bla"
+  },
+  {
+    idProduto: "3",
+    nome: "Prod3",
+    descricao: "Bla bla",
+    valor: "120.0",
+    estado: "Bla bla"
+  },
+  {
+    idProduto: "4",
+    nome: "Prod4",
+    descricao: "Bla bla",
+    valor: "1300.0",
+    estado: "Bla bla"
+  },
+  {
+    idProduto: "5",
+    nome: "Prod5",
+    descricao: "Bla bla",
+    valor: "9400.0",
+    estado: "Bla bla"
+  },
+  {
+    idProduto: "6",
+    nome: "Prod6",
+    descricao: "Bla bla",
+    valor: "1500.0",
+    estado: "Bla bla"
+  }
+])
